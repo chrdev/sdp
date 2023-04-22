@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2023 chrdev
+#
+# SPDX-License-Identifier: CC0-1.0
+
+/.reuse
+
+/build/
+/vc17/*
+!/vc17/sdp.sln
+!/vc17/sdp.sln.license
+!/vc17/sdp.vcxproj
+!/vc17/sdp.vcxproj.license
+!/vc17/sdp.vcxproj.filters
+!/vc17/sdp.vcxproj.filters.license

@@ -12,7 +12,7 @@ set SRCCLI=src/shared/cap.c src/shared/uac.c src/shared/unit.c src/cli/cmd.c src
 set GCC64=x86_64-w64-mingw32-gcc.exe
 set GCC32=i686-w64-mingw32-gcc.exe
 
-set CFLAGS=-Wno-incompatible-pointer-types -s -D _UNICODE -D UNICODE
+set CFLAGS=-Wno-incompatible-pointer-types -s -O2 -D _UNICODE -D UNICODE
 set LDFLAGS=-mwin32 -municode -mconsole
 
 set ARGS64=%CFLAGS% -o %OUTDIR%/%EXECLI64% %SRCCLI% %LDFLAGS%

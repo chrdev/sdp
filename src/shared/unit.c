@@ -30,11 +30,13 @@ typedef enum ModeType {
 }ModeType;
 
 #pragma pack(push, scsidata, 1)
+// P.208, sbc4r22.pdf - 5.20.2 READ CAPACITY (10) parameter data
 typedef struct ReadCapacityData10 {
 	DWORD lbLast;
 	DWORD lbSize;
 }ReadCapacityData10;
 
+// P.210, sbc4r22.pdf - 5.21.2 READ CAPACITY (16) parameter data
 typedef struct ReadCapacityData16 {
 	uint64_t lbLast;
 	uint32_t lbSize;
@@ -51,6 +53,7 @@ typedef struct ReadCapacityData16 {
 	BYTE reserved16[16];
 }ReadCapacityData16;
 
+// P.209, sbc4r22.pdf - 5.21 READ CAPACITY (16) command
 typedef struct Cdb16ServiceActionIn {
 	BYTE operationCode;
 	BYTE serviceAction : 5;

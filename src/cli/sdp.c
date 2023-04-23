@@ -140,7 +140,7 @@ swapColor(WORD attr) {
 }
 
 static inline void
-invertStdOut(void) {
+invertTextColor(void) {
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO info;
 	GetConsoleScreenBufferInfo(h, &info);
@@ -262,7 +262,7 @@ forEachDriveDo(uint64_t drives, const HandleDrive handleDrive, void* ex) {
 
 static inline void
 warn(void) {
-	static const wchar_t t[] = L"Caution: this software can cause MAJOR DAMAGE to your DATA & DEVICES!\n";
+	static const wchar_t t[] = L"Caution: this software can cause MAJOR DAMAGE to your DATA & DEVICES!";
 
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO info;
@@ -271,6 +271,7 @@ warn(void) {
 	SetConsoleTextAttribute(h, attr);
 	WriteConsoleW(h, t, _countof(t) - 1, &(DWORD){0}, NULL);
 	SetConsoleTextAttribute(h, info.wAttributes);
+	newline();
 }
 
 static void
@@ -295,10 +296,12 @@ help(void) {
 static void
 showTimerError(void) {
 	static const wchar_t kT[] =
-		L"\nTimers Syntax Error\n";
-	invertStdOut();
+		L"Timers Syntax Error";
+	newline();
+	invertTextColor();
 	SHOW_STATIC_TEXT(kT);
-	invertStdOut();
+	invertTextColor();
+	newline();
 }
 
 static void

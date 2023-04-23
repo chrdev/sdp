@@ -2,6 +2,7 @@ REM SPDX-FileCopyrightText: 2023 chrdev
 REM
 REM SPDX-License-Identifier: MIT
 
+@echo off
 set OUTDIR=build
 set PKGROOT=%OUTDIR%\sdp
 set OUTFILE=%PKGROOT%.7z

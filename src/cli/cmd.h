@@ -1,36 +1,29 @@
-// SPDX-FileCopyrightText: 2023 chrdev
-//
-// SPDX-License-Identifier: MIT
-
 #pragma once
 
-
 #include <stdint.h>
+#include <wchar.h>
 
-#include "../shared/unit.h" // enum PowerConditon, union TimerMask
+#include "../common/unit.h" // unit_kPowerConditionCount, union TimerMask
 
 
-typedef enum Intent{
+enum Intent{
 	cmd_kNone,
-	cmd_kUnknown,
 	cmd_kHelp,
 	cmd_kList,
-	cmd_kStart,
 	cmd_kStop,
 	cmd_kTimerHelp,
 	cmd_kTimerList,
 	cmd_kTimerWrite,
-	cmd_kTimerError,
-}Intent;
-
-enum { cmd_kDriveCountLimit = 64 };
+};
 
 typedef struct Cmd {
-	Intent intent;
-	uint64_t drives;
+	enum Intent intent;
 	union TimerMask;
 	uint32_t timers[unit_kPowerConditionCount];
+	uint32_t diskCount;
+	uint32_t diskIds[1];
 }Cmd;
 
-void
-cmd_parse(Cmd* cmd, int argc, const wchar_t* const* argv);
+
+Cmd*
+cmd_parse(int argc, const wchar_t* const* argv, const wchar_t** errmsg);

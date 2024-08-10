@@ -1,9 +1,4 @@
-// SPDX-FileCopyrightText: 2023 chrdev
-//
-// SPDX-License-Identifier: MIT
-
 #include "cap.h"
-
 
 #include <strsafe.h>
 #include <stdlib.h> // _countof

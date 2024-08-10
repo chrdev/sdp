@@ -1,13 +1,9 @@
-REM SPDX-FileCopyrightText: 2023 chrdev
-REM
-REM SPDX-License-Identifier: MIT
-
 @echo off
 set OUTDIR=build
-set EXECLI64=sdp64-gcc.exe
-set EXECLI32=sdp32-gcc.exe
+set EXECLI64=sdp.exe
+set EXECLI32=sdp_x86.exe
 
-set SRCCLI=src/shared/cap.c src/shared/uac.c src/shared/unit.c src/cli/cmd.c src/cli/sdp.c
+set SRCCLI=src/common/cap.c src/common/uac.c src/common/unit.c src/common/multisz.c src/common/disk.c src/cli/cmd.c src/cli/sdp.c
 
 set GCC64=x86_64-w64-mingw32-gcc.exe
 set GCC32=i686-w64-mingw32-gcc.exe

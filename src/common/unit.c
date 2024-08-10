@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 chrdev
-//
-// SPDX-License-Identifier: MIT
-
 #include "unit.h"
 
 #include <winioctl.h>
@@ -247,28 +243,30 @@ typedef struct Cdb6ModeSelect {
 }Cdb6ModeSelect;
 #pragma pack(pop, scsidata)
 
-bool
-unit_start(HANDLE h) {
-	SCSI_PASS_THROUGH spt = {
-		.Length = sizeof(SCSI_PASS_THROUGH),
-		.DataIn = SCSI_IOCTL_DATA_OUT,
-		.TimeOutValue = kTimeOut,
-		.CdbLength = CDB6GENERIC_LENGTH,
-		.Cdb[0] = SCSIOP_START_STOP_UNIT,
-		.Cdb[4] = 1,
-	};
+// This function has no practical use. So it's commented out.
+//bool
+//unit_start(HANDLE h) {
+//	SCSI_PASS_THROUGH spt = {
+//		.Length = sizeof(SCSI_PASS_THROUGH),
+//		.DataIn = SCSI_IOCTL_DATA_OUT,
+//		.TimeOutValue = kTimeOut,
+//		.CdbLength = CDB6GENERIC_LENGTH,
+//		.Cdb[0] = SCSIOP_START_STOP_UNIT,
+//		.Cdb[4] = 1,
+//	};
+//
+//	DWORD cb = 0;
+//	return DeviceIoControl(
+//		h, IOCTL_SCSI_PASS_THROUGH,
+//		&spt, sizeof(SCSI_PASS_THROUGH),
+//		&spt, sizeof(SCSI_PASS_THROUGH),
+//		&cb, FALSE
+//	);
+//}
 
-	DWORD cb = 0;
-	return DeviceIoControl(
-		h, IOCTL_SCSI_PASS_THROUGH,
-		&spt, sizeof(SCSI_PASS_THROUGH),
-		&spt, sizeof(SCSI_PASS_THROUGH),
-		&cb, FALSE
-	);
-}
-
 bool
-unit_stop(HANDLE h) {
+unit_stop(HANDLE h)
+{
 	SCSI_PASS_THROUGH spt = {
 		.Length = sizeof(SCSI_PASS_THROUGH),
 		.DataIn = SCSI_IOCTL_DATA_OUT,
@@ -731,7 +729,8 @@ fillCharacteristics(UnitInfo* info, const CharacteristicsData* p) {
 //}
 
 bool
-unit_getInfo(HANDLE h, UnitInfo* info) {
+unit_getInfo(HANDLE h, UnitInfo* info)
+{
 	const StandardInquiryData* inquiry = getStandardInquiry(h);
 	if (!inquiry) return false;
 
@@ -787,7 +786,8 @@ fillTimers(UnitInfo* info, ModeType type, const PowerConditionModePage* p) {
 }
 
 bool
-unit_getTimers(HANDLE h, UnitInfo* info) {
+unit_getTimers(HANDLE h, UnitInfo* info)
+{
 	info->timerMask = 0;
 	const PowerConditionModePage* p = getPowerCondition(h, kModeCurrent);
 	if (!p) return false;
@@ -862,9 +862,20 @@ writeTimers(HANDLE h, BYTE mask, const DWORD* timers) {
 }
 
 bool
-unit_setTimers(HANDLE h, BYTE mask, const DWORD timers[unit_kPowerConditionCount]) {
+unit_setTimers(HANDLE h, BYTE mask, const DWORD timers[unit_kPowerConditionCount], const wchar_t** errmsg)
+{
+	static const wchar_t* kNoTimer = L"Device has no power condition timers.";
+	static const wchar_t* kNotWritable = L"Timers not writable.";
+
+	*errmsg = NULL;
 	UnitInfo info;
-	if (!unit_getTimers(h, &info)) return false;
-	if (!timersWritable(&info, mask, timers)) return false;
+	if (!unit_getTimers(h, &info)) {
+		*errmsg = kNoTimer;
+		return false;
+	}
+	if (!timersWritable(&info, mask, timers)) {
+		*errmsg = kNotWritable;
+		return false;
+	}
 	return writeTimers(h, mask, timers);
 }

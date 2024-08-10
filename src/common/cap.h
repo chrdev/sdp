@@ -1,10 +1,7 @@
-// SPDX-FileCopyrightText: 2023 chrdev
-//
-// SPDX-License-Identifier: MIT
-
 #pragma once
 
 #include <stdint.h>
+#include <wchar.h>
 
 
 // Format: 000S

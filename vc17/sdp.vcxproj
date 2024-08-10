@@ -135,15 +135,20 @@
   <ItemGroup>
     <ClCompile Include="..\src\cli\cmd.c" />
     <ClCompile Include="..\src\cli\sdp.c" />
-    <ClCompile Include="..\src\shared\cap.c" />
-    <ClCompile Include="..\src\shared\uac.c" />
-    <ClCompile Include="..\src\shared\unit.c" />
+    <ClCompile Include="..\src\common\cap.c" />
+    <ClCompile Include="..\src\common\disk.c" />
+    <ClCompile Include="..\src\common\multisz.c" />
+    <ClCompile Include="..\src\common\uac.c" />
+    <ClCompile Include="..\src\common\unit.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\cli\cmd.h" />
-    <ClInclude Include="..\src\shared\cap.h" />
-    <ClInclude Include="..\src\shared\uac.h" />
-    <ClInclude Include="..\src\shared\unit.h" />
+    <ClInclude Include="..\src\common\cap.h" />
+    <ClInclude Include="..\src\common\disk.h" />
+    <ClInclude Include="..\src\common\heap.h" />
+    <ClInclude Include="..\src\common\multisz.h" />
+    <ClInclude Include="..\src\common\uac.h" />
+    <ClInclude Include="..\src\common\unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

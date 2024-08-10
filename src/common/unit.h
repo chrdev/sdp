@@ -1,9 +1,6 @@
-// SPDX-FileCopyrightText: 2023 chrdev
-//
-// SPDX-License-Identifier: MIT
-
 #pragma once
 
+#include <sdkddkver.h>
 #include <Windows.h>
 
 #include <stdbool.h>
@@ -22,7 +19,7 @@ enum {
 	unit_kCchSerial,
 };
 
-typedef enum PowerConditon {
+enum PowerConditon {
 	unit_kIdle,
 	unit_kIdleA = unit_kIdle,
 	unit_kIdleB,
@@ -31,9 +28,9 @@ typedef enum PowerConditon {
 	unit_kStandbyZ,
 	unit_kStandby = unit_kStandbyZ,
 	unit_kPowerConditionCount,
-}PowerCondition;
+};
 
-typedef enum UnitFormFactor {
+enum UnitFormFactor {
 	unit_kFormFactorNA,
 	unit_kFormFactor525,
 	unit_kFormFactor35,
@@ -41,7 +38,7 @@ typedef enum UnitFormFactor {
 	unit_kFormFactor18,
 	unit_kFormFactor18minus,
 	unit_kFormFactorOther,
-}UnitFormFactor;
+};
 
 typedef union TimerMask {
 	struct {
@@ -61,17 +58,15 @@ typedef struct UnitInfo {
 	wchar_t product[unit_kCchProductId];
 	wchar_t revision[unit_kCchRevision];
 	wchar_t serial[unit_kCchSerial];
-	UnitFormFactor formFactor;
+	enum UnitFormFactor formFactor;
 	WORD rpm;
-	union TimerMask;
+	TimerMask;
 	bool timerWritable;
 	DWORD timers[unit_kPowerConditionCount];
 	DWORD timersModMask[unit_kPowerConditionCount];
 	DWORD timersDefault[unit_kPowerConditionCount];
 }UnitInfo;
 
-bool
-unit_start(HANDLE h);
 
 bool
 unit_stop(HANDLE h);
@@ -88,4 +83,4 @@ bool
 unit_getTimers(HANDLE h, UnitInfo* info);
 
 bool
-unit_setTimers(HANDLE h, BYTE mask, const DWORD timers[unit_kPowerConditionCount]);
+unit_setTimers(HANDLE h, BYTE mask, const DWORD timers[unit_kPowerConditionCount], const wchar_t** errmsg);

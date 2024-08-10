@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 chrdev
-//
-// SPDX-License-Identifier: MIT
-
 #include "uac.h"
 
 #include <Windows.h>
@@ -9,7 +5,8 @@
 
 
 bool
-uac_isElevated(void) {
+uac_isElevated(void)
+{
 	HANDLE h;
 	if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &h)) return false;
 

@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\shared\uac.c">
+    <ClCompile Include="..\src\common\uac.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\shared\unit.c">
+    <ClCompile Include="..\src\common\unit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\cli\cmd.c">
@@ -27,7 +27,13 @@
     <ClCompile Include="..\src\cli\sdp.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\shared\cap.c">
+    <ClCompile Include="..\src\common\cap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\common\disk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\common\multisz.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,13 +41,22 @@
     <ClInclude Include="..\src\cli\cmd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\shared\uac.h">
+    <ClInclude Include="..\src\common\uac.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\shared\unit.h">
+    <ClInclude Include="..\src\common\unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\shared\cap.h">
+    <ClInclude Include="..\src\common\cap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\common\disk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\common\multisz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\common\heap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
